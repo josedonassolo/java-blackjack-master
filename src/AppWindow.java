@@ -103,6 +103,10 @@ public class AppWindow extends JFrame implements ActionListener, ComponentListen
 		menuBar.add(helpMenu);
 
 		setJMenuBar(menuBar);
+
+		hitAction.setEnabled(false);
+		doubleAction.setEnabled(false);
+		standAction.setEnabled(false);
 	}
 
 	private void setupKeyboardShortcuts() {
@@ -134,41 +138,71 @@ public class AppWindow extends JFrame implements ActionListener, ComponentListen
 		add(gamePanel, BorderLayout.CENTER);
 	}
 
+	private void enableButton() {
+		hitAction.setEnabled(true);
+		doubleAction.setEnabled(true);
+		standAction.setEnabled(true);
+	}
+
+	private void disableButton() {
+		hitAction.setEnabled(false);
+		doubleAction.setEnabled(false);
+		standAction.setEnabled(false);
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int playerID = gamePanel.getCurrentPlayerID();
 
+		disableButton();
+
 		if (e.getSource() == oneChip) {
 			gamePanel.increaseBet(1, playerID);
+			enableButton();
 		} else if (e.getSource() == fiveChip) {
 			gamePanel.increaseBet(5, playerID);
+			enableButton();
 		} else if (e.getSource() == tenChip) {
 			gamePanel.increaseBet(10, playerID);
+			enableButton();
 		} else if (e.getSource() == twentyFiveChip) {
 			gamePanel.increaseBet(25, playerID);
+			enableButton();
 		} else if (e.getSource() == hundredChip) {
 			gamePanel.increaseBet(100, playerID);
+			enableButton();
 		} else if (e.getSource() == dealAction) {
 			gamePanel.newGame(playerID);
+			enableButton();
 		} else if (e.getSource() == hitAction) {
 			gamePanel.hit(playerID);
+			enableButton();
 		} else if (e.getSource() == doubleAction) {
 			gamePanel.playDouble(playerID);
+			enableButton();
 		} else if (e.getSource() == standAction) {
 			gamePanel.stand(playerID);
+			enableButton();
 		} else if (e.getSource() == updatePlayerDetails) {
 			gamePanel.updatePlayer(playerID);
+			enableButton();
 		} else if (e.getSource() == savePlayer) {
 			gamePanel.savePlayer(playerID);
+			enableButton();
 		} else if (e.getSource() == openPlayer) {
 			gamePanel.openPlayer(playerID);
+			enableButton();
 		} else if (e.getSource() == windowTableColourMenu) {
 			changeTableColour();
+			enableButton();
 		} else if (e.getSource() == helpBlackjackRulesMenu) {
 			showBlackjackRules();
+			enableButton();
 		} else if (e.getSource() == helpAboutMenu) {
 			showAboutInfo();
+			enableButton();
 		}
+
 	}
 
 	private void changeTableColour() {
